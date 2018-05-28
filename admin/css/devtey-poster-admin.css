@@ -88,8 +88,15 @@ input:checked + .slider:before {
 }
 
 .dp-scheduler-status {
-    color: red;
     font-weight: 450;
+}
+.dp-nonaktif {
+    color: white;
+    background: purple;
+}
+.dp-aktif {
+    color: white;
+    background: #0073aa;
 }
 
 .devtey-title {

@@ -16,7 +16,8 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="dp-container">
     <h2 class="devtey-title">Post Scheduler</h2>
-    <div class="devtey-label-title">Status: <span class="dp-scheduler-status">Tidak Aktif</span></div>
+    <div class="devtey-label-title">Status: <span class="dp-scheduler-status dp-aktif">Aktif</span></div>
+    <div class="devtey-label-title">Status: <span class="dp-scheduler-status dp-nonaktif">Tidak Aktif</span></div>
     <hr>
 
     <form>
@@ -39,6 +40,7 @@
         </div>
 
         <div><input type="submit" value="Aktifkan" class="devtey-submit"></div>
+        <div><input type="submit" value="Non-Aktifkan" class="devtey-submit dp-nonaktif"></div>
 
     </form>
 </div>
