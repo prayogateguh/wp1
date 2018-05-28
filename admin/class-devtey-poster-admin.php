@@ -61,18 +61,6 @@ class Devtey_Poster_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Devtey_Poster_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Devtey_Poster_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/devtey-poster-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -84,20 +72,55 @@ class Devtey_Poster_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Devtey_Poster_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Devtey_Poster_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/devtey-poster-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	/**
+	 * Register the Devtey Poster menu on the sidebar
+	 * 
+	 * @since	1.0.0
+	 */
+	public function display_admin_page() {
+		add_menu_page('Devtey Poster', 'Devtey Poster', 'manage_options', 'devtey-poster', array($this, 'devtey_poster'), 'dashicons-awards', '3.0' );
+		add_submenu_page('devtey-poster', 'Active', 'Active', 'manage_options', 'devtey-poster' );
+		add_submenu_page('devtey-poster', 'Post Creator', 'Post Creator', 'manage_options', 'dp-post-creator', array($this, 'dp_post_creator') );
+		add_submenu_page('devtey-poster', 'Post Scheduler', 'Post Scheduler', 'manage_options', 'dp-post-scheduler', array($this, 'dp_post_scheduler') );
+		add_submenu_page('devtey-poster', 'About', 'About', 'manage_options', 'dp-about', array($this, 'dp_about') );
+	}
+
+	/**
+	 * Register the layout for the Devtey Poster admin
+	 * 
+	 * @since	1.0.0
+	 */
+	
+	public function devtey_poster() {
+		include_once 'partials/dp-activator-display.php';
+	}
+
+	/**
+	 * Register the layout for the Devtey Poster admin
+	 * 
+	 * @since	1.0.0
+	 */
+	
+	public function dp_post_creator() {
+		include_once 'partials/dp-poster-display.php';
+	}
+
+	/**
+	 * Display callback for the submenu page.
+	 */
+	function dp_post_scheduler() { 
+		include_once 'partials/dp-scheduler-display.php';
+	}
+
+	/**
+	 * Display callback for the submenu page.
+	 */
+	function dp_about() { 
+		include_once 'partials/dp-about-display.php';
 	}
 
 }

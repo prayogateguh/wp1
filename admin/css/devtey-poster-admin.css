@@ -1,4 +1,122 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+/* Style inputs with type="text", select elements and textareas */
+.devtey-form {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+.devtey-submit {
+    background: #0073aa;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+    width: 150px;
+    height: 37px;
+}
+
+/* Add a background color and some padding around the form */
+.dp-container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #0073aa;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #0073aa;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.devtey-label-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.devtey-version {
+    font-size: 12.5px;
+}
+
+.dp-scheduler-status {
+    color: red;
+    font-weight: 450;
+}
+
+.devtey-title {
+    font-size: 23px;
+    font-weight: 400;
+    margin: 0;
+    padding: 9px 0 4px;
+    line-height: 29px;
+}
+
+.devtey-toggle {
+    margin-bottom: 14px;
+}
+
+.devtey-toggle > .desc {
+    margin-left: 5px;
+}
+
+.devtey-toggle > .desc > .title {
+    margin-left: 70px;
+    margin-top: -35px;
+    font-size: 14px;
+    display: block;
+}
+
+.devtey-toggle > .desc > .desc {
+    margin-left: 70px;
+    font-style: italic;
+    color: #666;
+}

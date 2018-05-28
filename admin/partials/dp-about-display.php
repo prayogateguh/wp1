@@ -14,3 +14,13 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<div class="dp-container">
+    <h2 class="devtey-title">Tentang Devtey</h2>
+    <hr>
+    <p>Devtey berada di Internet, namun kantornya di Yogyakarta, homepage di <a href="https://devtey.com" target="_blank">Devtey.com</a>,</p>
+    <p>Salam</p><hr>
+    <ol>
+        <li>Muhammad Teguh</li>
+        <li>Yupi Firdaus</li>
+    </ol>
+</div>
