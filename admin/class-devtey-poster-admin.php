@@ -83,10 +83,6 @@ class Devtey_Poster_Admin {
 	 */
 	public function display_admin_page() {
 		add_menu_page('Devtey Poster', 'Devtey Poster', 'manage_options', 'devtey-poster', array($this, 'devtey_poster'), 'dashicons-awards', '3.0' );
-		add_submenu_page('devtey-poster', 'Active', 'Active', 'manage_options', 'devtey-poster' );
-		add_submenu_page('devtey-poster', 'Post Creator', 'Post Creator', 'manage_options', 'dp-post-creator', array($this, 'dp_post_creator') );
-		add_submenu_page('devtey-poster', 'Post Scheduler', 'Post Scheduler', 'manage_options', 'dp-post-scheduler', array($this, 'dp_post_scheduler') );
-		add_submenu_page('devtey-poster', 'About', 'About', 'manage_options', 'dp-about', array($this, 'dp_about') );
 	}
 
 	/**
@@ -110,6 +106,11 @@ class Devtey_Poster_Admin {
 		register_setting( 'dp-scheduler-settings', 'dp-rtg-post' );
 		register_setting( 'dp-scheduler-settings', 'dp-ack-post' );
 	}
+	public function dp_poster() {
+		// dp poster aktif
+		register_setting( 'dp-aktif', 'dp-info' );
+		register_setting( 'dp-aktif', 'dp-key' );
+	}
 
 	/**
 	 * Register the layout for the Devtey Poster admin
@@ -118,6 +119,8 @@ class Devtey_Poster_Admin {
 	 */
 	
 	public function devtey_poster() {
+		include_once 'dp-hurungken.php';
+		include_once 'dp-pareman.php';
 		include_once 'partials/dp-activator-display.php';
 	}
 
@@ -143,6 +146,13 @@ class Devtey_Poster_Admin {
 	 */
 	function dp_about() { 
 		include_once 'partials/dp-about-display.php';
+	}
+
+	public function display_poster_page() {
+		add_submenu_page('devtey-poster', 'Active', 'Active', 'manage_options', 'devtey-poster' );
+		add_submenu_page('devtey-poster', 'Post Creator', 'Post Creator', 'manage_options', 'dp-post-creator', array($this, 'dp_post_creator') );
+		add_submenu_page('devtey-poster', 'Post Scheduler', 'Post Scheduler', 'manage_options', 'dp-post-scheduler', array($this, 'dp_post_scheduler') );
+		add_submenu_page('devtey-poster', 'About', 'About', 'manage_options', 'dp-about', array($this, 'dp_about') );
 	}
 
 }

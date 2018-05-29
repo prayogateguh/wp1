@@ -73,6 +73,7 @@ class Devtey_Poster {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'devtey-poster';
+		update_option('dp_info', 'success');
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -158,6 +159,9 @@ class Devtey_Poster {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'display_admin_page' );
+		if (get_option('dp_poster') == 1) {
+			$this->loader->add_action( 'admin_menu', $plugin_admin, 'display_poster_page' );
+		}
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'dp_poster_settings' ); // register dp-poster setting options
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'dp_scheduler_settings' ); // register dp-scheduler setting options
 

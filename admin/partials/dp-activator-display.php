@@ -17,21 +17,25 @@
 <div class="dp-container">
     <h2 class="devtey-title">Devtey Poster <span class="devtey-version">v1.0.0</span></h2>
     <hr>
-    <p>Silakan masukkan kode lisensi untuk mengaktifkan plugin ini. Lisensi telah diberikan ketika kamu membeli Devtey Poster.</p>
-    <form action="">
-        <label for="post-title" class="devtey-label-title">Kode Lisensi</label>
-        <input name="post-title" type="text" id="post-title" placeholder="XXXX-XXXX-XXXX" class="devtey-form">
-
+    <?php if (empty(get_option('dp_poster'))) { ?>
+        <p>Silakan masukkan kode lisensi untuk mengaktifkan plugin ini. Lisensi telah diberikan ketika kamu membeli Devtey Poster.</p>
+    <?php } else { ?>
+        <p><span class="dp-aktif">Plugin Telah Aktif</span>, terima kasih telah membeli produk kami. Semoga bermanfaat. :)</p>
+    <?php } ?>
+    
+    <form method="post">
+        <label for="dp_key" class="devtey-label-title">Kode Lisensi</label>
+        <input name="dp_key" type="text" id="dp_key" placeholder="XXXX-XXXX-XXXX" class="devtey-form" value="<?php echo esc_attr( get_option('dp_key') ); ?>">
         <div>
-        <?php if ( true ) { ?>
-            <input type="hidden" name="dp-aktif" value="1">
-            <?php submit_button( 'Aktifkan', 'primary aktif' ); ?>
-        <?php } else { ?>
-            <input type="hidden" name="dp-aktif" value="0">
-            <?php submit_button( 'Non Aktifkan', 'non-aktif' ); ?>
-        <?php } ?>
+        <?php
+            if (get_option('dp_poster') == 1) { ?>
+            <input type="submit" name="dp_off" value="Matikan" class="button non-aktif" />
+            <?php } else { ?>
+            <input type="submit" name="dp_on" value="Hidupkan" class="button-primary aktif" />
+            <?php } ?>
+        
         </div>
     </form>
-    <p><span class="dp-aktif">Plugin Telah Aktif</span>, terima kasih telah membeli produk kami. Semoga bermanfaat. :)</p>
-    <p><span class="dp-nonaktif">Gagal aktivasi</span>, silakan dicek kembali kode lisensimu. Terima kasih.</p>
+    
+    
 </div>
