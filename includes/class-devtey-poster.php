@@ -158,6 +158,8 @@ class Devtey_Poster {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'display_admin_page' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'dp_poster_settings' ); // register dp-poster setting options
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'dp_scheduler_settings' ); // register dp-scheduler setting options
 
 	}
 

@@ -11,14 +11,19 @@
 }
 
 /* Style the submit button with a specific background color etc */
-.devtey-submit {
-    background: #0073aa;
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
-    padding: 5px;
+.button.aktif {
+    padding: 0px !important;
     width: 150px;
     height: 37px;
+}
+.button.non-aktif {
+    padding: 0px !important;
+    width: 150px;
+    height: 37px;
+}
+.dp-form p.submit {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
 }
 
 /* Add a background color and some padding around the form */

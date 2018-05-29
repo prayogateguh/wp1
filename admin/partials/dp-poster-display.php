@@ -17,21 +17,29 @@
 <div class="dp-container">
     <h2 class="devtey-title">Devtey Poster <span class="devtey-version">v1.0.0</span></h2> 
     <hr>
-  <form>
-
+  <form method="post" action="options.php">
+    <?php settings_fields( 'dp-poster-settings' ); ?>
+    <?php do_settings_sections( 'dp-poster-settings' ); ?>
     <label for="kategori" class="devtey-label-title">Pilih Kategori</label>
-    <select id="kategori" name="kategori" class="devtey-form">
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
+    <select id="kategori" name="dp-kategori" class="devtey-form">
+    <?php
+        $args = array('hide_empty' => false);
+        $categories = get_categories( $args );
+        $stored_category_id = esc_attr( get_option('dp-kategori') );
+        foreach ( $categories as $category ) { 
+            $selected = ( $stored_category_id ==  $category->term_id  ) ? 'selected' : ''; ?>
+            <option name="kategories[option_one]" value="<?php echo $category->term_id ?>" <?php echo $selected ?>><?php echo $category->name ?></option>
+            <?php
+        }
+    ?>
     </select>
 
     <label for="post-title" class="devtey-label-title">Format Judul</label>
-    <input name="post-title" type="text" id="post-title" placeholder="Contoh: Wallpaper {file_name} Free Download" class="devtey-form">
+    <input name="dp-post-title" type="text" id="post-title" placeholder="Contoh: Wallpaper {file_name} Free Download" class="devtey-form" value="<?php echo esc_attr( get_option('dp-post-title') ); ?>">
 
     <div class="devtey-toggle">
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" name="dp-auto-tag" value="1" <?php checked( get_option('dp-auto-tag') ); ?>>
             <span class="slider"></span>
         </label>
         <label class="desc">
@@ -43,7 +51,7 @@
 
     <div class="devtey-toggle">
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" name="dp-hapus-exif" value="1" <?php checked( get_option('dp-hapus-exif') ); ?>>
             <span class="slider"></span>
         </label>
         <label class="desc">
@@ -54,7 +62,7 @@
 
     <div class="devtey-toggle">
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" name="dp-cap-judul" value="1" <?php checked( get_option('dp-cap-judul') ); ?>>
             <span class="slider"></span>
         </label>
         <label class="desc">
@@ -65,7 +73,7 @@
 
     <div class="devtey-toggle">
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" name="dp-auto-desc" value="1" <?php checked( get_option('dp-auto-desc') ); ?>>
             <span class="slider"></span>
         </label>
         <label class="desc">
@@ -74,7 +82,7 @@
         </label>
     </div>
 
-    <div><input type="submit" value="Simpan" class="devtey-submit"></div>
+    <div><?php submit_button( 'Save Settings' ); ?></div>
 
   </form>
 </div>

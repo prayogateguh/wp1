@@ -22,8 +22,15 @@
         <label for="post-title" class="devtey-label-title">Kode Lisensi</label>
         <input name="post-title" type="text" id="post-title" placeholder="XXXX-XXXX-XXXX" class="devtey-form">
 
-        <input type="submit" value="Aktifkan" class="devtey-submit">
-        <input type="submit" value="Non-Aktifkan" class="devtey-submit dp-nonaktif">
+        <div>
+        <?php if ( true ) { ?>
+            <input type="hidden" name="dp-aktif" value="1">
+            <?php submit_button( 'Aktifkan', 'primary aktif' ); ?>
+        <?php } else { ?>
+            <input type="hidden" name="dp-aktif" value="0">
+            <?php submit_button( 'Non Aktifkan', 'non-aktif' ); ?>
+        <?php } ?>
+        </div>
     </form>
     <p><span class="dp-aktif">Plugin Telah Aktif</span>, terima kasih telah membeli produk kami. Semoga bermanfaat. :)</p>
     <p><span class="dp-nonaktif">Gagal aktivasi</span>, silakan dicek kembali kode lisensimu. Terima kasih.</p>

@@ -90,6 +90,28 @@ class Devtey_Poster_Admin {
 	}
 
 	/**
+	 * Retrieve the devtey poster options.
+	 *
+	 * @since     1.0.0
+	 */
+	public function dp_poster_settings() {
+		// post creator options
+		register_setting( 'dp-poster-settings', 'dp-kategori' );
+  		register_setting( 'dp-poster-settings', 'dp-post-title' );
+		register_setting( 'dp-poster-settings', 'dp-auto-tag' );
+		register_setting( 'dp-poster-settings', 'dp-hapus-exif' );
+		register_setting( 'dp-poster-settings', 'dp-cap-judul' );
+		register_setting( 'dp-poster-settings', 'dp-auto-desc' );
+	}
+	public function dp_scheduler_settings() {
+		// post scheduler options
+		register_setting( 'dp-scheduler-settings', 'dp-aktif' );
+		register_setting( 'dp-scheduler-settings', 'dp-jml-post' );
+		register_setting( 'dp-scheduler-settings', 'dp-rtg-post' );
+		register_setting( 'dp-scheduler-settings', 'dp-ack-post' );
+	}
+
+	/**
 	 * Register the layout for the Devtey Poster admin
 	 * 
 	 * @since	1.0.0
