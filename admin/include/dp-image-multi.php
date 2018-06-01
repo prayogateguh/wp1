@@ -32,9 +32,10 @@ if (get_option('dp-cap-judul') == 1) {
 }
 // 6 - auto descripsi
 // 7 - multiple images into one post
-$_id = strtok($_file_name, '-'); // ambil string sebelum tanda strip (-) pertama
+$_attch_id = strtok($attachment->post_title, '-'); // ambil string sebelum tanda strip (-) pertama
+
 if (!isset($_SESSION['post_id'])) { // jika belum ada post, berarti ini upload pertama => bikin post
-    $_SESSION['_id'] = $_id;
+    $_SESSION['_id'] = $_attch_id;
     $_SESSION['attch_id'] = $attachment->ID;
     $_SESSION['attch_loc'] = $attachment->guid;
     $my_post_data = array(
@@ -46,8 +47,8 @@ if (!isset($_SESSION['post_id'])) { // jika belum ada post, berarti ini upload p
     $post_id = wp_insert_post( $my_post_data );
     $_SESSION['post_id'] = $post_id;
 }
-if ($_id != $_SESSION['_id']) { // jika _id (nomer unik gambar untuk pembeda id post) berbeda dengan sessi, bikin post lagi
-    $_SESSION['_id'] = $_id;
+if ($_attch_id != $_SESSION['_id']) { // jika _id (nomer unik gambar untuk pembeda id post) berbeda dengan sessi, bikin post lagi
+    $_SESSION['_id'] = $_attch_id;
     $_SESSION['attch_id'] = $attachment->ID;
     $_SESSION['attch_loc'] = $attachment->guid;
     $my_post_data = array(
@@ -61,14 +62,21 @@ if ($_id != $_SESSION['_id']) { // jika _id (nomer unik gambar untuk pembeda id 
 }
 
 // attach media to post
+$_post_title = str_replace("_"," ", $attachment->post_title);
+$_file_name = @end((explode('-', $_post_title, 3)));
+$_post_title = str_replace("_","-", $attachment->post_title);
+$_post_name = @end((explode('-', $_post_title, 3)));
 wp_update_post( array(
     'ID' => $attach_ID,
     'post_parent' => $_SESSION['post_id'],
-    
+    'post_title' => ucwords($_file_name),
+    'post_name' => $attach_ID .'-'. $_post_name
 ) );
 // update post
-$_kontent = '<a href="%s" rel="attachment wp-att-%s"><img class="alignnone size-full wp-image-%s" src="%s" alt="" /></a>';
-$_kontent = sprintf($_kontent, get_attachment_link(($_SESSION['attch_id'])), $_SESSION['attch_id'], $_SESSION['attch_id'], $_SESSION['attch_loc']);    
+//echo do_shortcode("[name_of_shortcode post_id={$_SESSION['post_id']}]");
+$_gallery = do_shortcode("[dpgallery id={$_SESSION['post_id']}]");
+$_kontent = '<a href="%s" rel="attachment wp-att-%s"><img class="alignnone size-full wp-image-%s" src="%s" alt="" /></a><br/>%s';
+$_kontent = sprintf($_kontent, get_attachment_link(($_SESSION['attch_id'])), $_SESSION['attch_id'], $_SESSION['attch_id'], $_SESSION['attch_loc'], $_gallery);
 wp_update_post( array(
     'ID' => $_SESSION['post_id'],
     'post_content' => $_kontent

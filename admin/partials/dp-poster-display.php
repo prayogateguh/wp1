@@ -39,6 +39,17 @@
 
     <div class="devtey-toggle">
         <label class="switch">
+            <input type="checkbox" name="dp-multi-wallpapers" value="1" <?php checked( get_option('dp-multi-wallpapers') ); ?>>
+            <span class="slider"></span>
+        </label>
+        <label class="desc">
+            <span class="title devtey-label-title">Banyak Wallpaper dalam satu post?</span>
+            <span class="desc">(Jika diaktifkan, satu posting akan berisikan banyak wallpaper/gallery.)</span>
+        </label>
+    </div>
+
+    <div class="devtey-toggle">
+        <label class="switch">
             <input type="checkbox" name="dp-auto-tag" value="1" <?php checked( get_option('dp-auto-tag') ); ?>>
             <span class="slider"></span>
         </label>
@@ -88,6 +99,7 @@
 </div>
 
 <?php
+session_unset(); // unset all session
 if (!current_user_can('upload_files'))
 	wp_die(__('Sorry, you are not allowed to upload files.'));
 		

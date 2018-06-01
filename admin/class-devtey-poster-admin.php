@@ -93,7 +93,8 @@ class Devtey_Poster_Admin {
 	public function dp_poster_settings() {
 		// post creator options
 		register_setting( 'dp-poster-settings', 'dp-kategori' );
-  		register_setting( 'dp-poster-settings', 'dp-post-title' );
+		register_setting( 'dp-poster-settings', 'dp-post-title' );
+		register_setting( 'dp-poster-settings', 'dp-multi-wallpapers' );
 		register_setting( 'dp-poster-settings', 'dp-auto-tag' );
 		register_setting( 'dp-poster-settings', 'dp-hapus-exif' );
 		register_setting( 'dp-poster-settings', 'dp-cap-judul' );
@@ -153,7 +154,11 @@ class Devtey_Poster_Admin {
 	 * Image uploader actions
 	 */
 	function post_creator( $attach_ID ) {
-		include_once 'include/dp-image-creator.php';
+		if (get_option('dp-multi-wallpapers') == 1) {
+			include_once 'include/dp-image-multi.php';
+		} else {
+			include_once 'include/dp-image-single.php';
+		}
 	}
 
 	/**

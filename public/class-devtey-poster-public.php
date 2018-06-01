@@ -100,4 +100,36 @@ class Devtey_Poster_Public {
 
 	}
 
+	// register shortcode
+	public function register_shortcodes() {
+		add_shortcode( 'dpgallery', array( $this, 'dp_gallery') );
+	}
+
+	public function dp_gallery($atts) {
+		$_attch_id = array();
+		$args = array(
+            'post_parent'    => $atts['id'],
+            'post_type'      => 'attachment',
+            'numberposts'    => -1, // show all
+            'post_status'    => 'any',
+            'post_mime_type' => 'image',
+            'orderby'        => 'menu_order',
+            'order'           => 'ASC'
+       	);
+		$images = get_posts($args);
+		
+		foreach ($images as $image) {
+			array_push($_attch_id,$image->ID); // get all attachment id
+		}
+
+		if (count($_attch_id) > 1) {
+			array_shift($_attch_id); // hapus element pertama, karena sudah ditampilkan
+		} else {
+			return "";
+		}
+
+		$_attch_id = implode(',', $_attch_id);
+		return "[gallery columns=\"4\" ids=\"{$_attch_id}\"]";
+	}
+
 }
