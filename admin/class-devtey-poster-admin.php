@@ -131,6 +131,7 @@ class Devtey_Poster_Admin {
 	 */
 	
 	public function dp_post_creator() {
+		include_once 'include/dp-image-post.php';
 		include_once 'partials/dp-poster-display.php';
 	}
 
@@ -146,6 +147,25 @@ class Devtey_Poster_Admin {
 	 */
 	function dp_about() { 
 		include_once 'partials/dp-about-display.php';
+	}
+
+	/**
+	 * Image uploader actions
+	 */
+	function post_creator( $attach_ID ) {
+		include_once 'include/dp-image-creator.php';
+	}
+
+	/**
+	 * session for create-posts-from-image-upload
+	 */
+	function start_session() {
+		if(!session_id()) {
+			session_start();
+		}
+	}
+	function end_session() {
+		session_destroy();
 	}
 
 	public function display_poster_page() {

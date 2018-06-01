@@ -164,6 +164,10 @@ class Devtey_Poster {
 		}
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'dp_poster_settings' ); // register dp-poster setting options
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'dp_scheduler_settings' ); // register dp-scheduler setting options
+		$this->loader->add_action( 'add_attachment', $plugin_admin, 'post_creator'); // create post from image upload
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'start_session' ); // create session
+		$this->loader->add_action( 'wp_logout', $plugin_admin, 'end_session' ); // end the session when logout
+		$this->loader->add_action( 'wp_login', $plugin_admin, 'end_session' ); // end the session when login
 
 	}
 
