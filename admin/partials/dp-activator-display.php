@@ -31,7 +31,7 @@
             if (get_option('dp_poster') == 1) { ?>
             <input type="submit" name="dp_off" value="Matikan" class="button non-aktif" />
             <?php } else { ?>
-            <input type="submit" name="dp_on" value="Hidupkan" class="button-primary aktif" />
+            <input type="submit" name="dp_on" value="Hidupkan" class="button button-primary aktif" />
             <?php } ?>
         
         </div>

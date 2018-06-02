@@ -102,7 +102,7 @@ class Devtey_Poster_Admin {
 	}
 	public function dp_scheduler_settings() {
 		// post scheduler options
-		register_setting( 'dp-scheduler-settings', 'dp-aktif' );
+		register_setting( 'dp-scheduler-settings', 'dp-scheduler-status' );
 		register_setting( 'dp-scheduler-settings', 'dp-jml-post' );
 		register_setting( 'dp-scheduler-settings', 'dp-rtg-post' );
 		register_setting( 'dp-scheduler-settings', 'dp-ack-post' );
@@ -199,6 +199,66 @@ class Devtey_Poster_Admin {
 		imagejpeg($clearExif, $imagePath, 100);
 		imagedestroy($clearExif);
 		return $imagePath;
+	}
+
+	/**
+	 * dp cron scheduler
+	 */
+	public function dp_rentang($rentang) {
+		if (substr_count($rentang,":") == 2) {
+			$waktu = explode(":", $rentang);
+		} else {
+			update_option('dp-rtg-post', '01:00:00');
+			$waktu = explode(":", $rentang);
+		}
+		
+		$jam = $waktu[0] * 3600;
+		$menit = $waktu[1] * 60;
+		$detik = $waktu[2];
+		$waktu = (int)($jam + $menit + $detik);
+		
+        return $waktu;
+    }
+	function dp_next_schedule($schedules) {    // add custom time when to check for next auto post
+        if (get_option('dp-scheduler-status') == 0) return $schedules;
+        $timesecs = $this->dp_rentang(get_option('dp-rtg-post'));
+        $schedules['dp_schedule'] = array(
+            'interval' => $timesecs, 'display' => 'DP Scheduler'
+        );
+        return $schedules;
+	}
+	function dp_scheduler() {
+		$aps_enabled = get_option('dp-scheduler-status');
+        if ($aps_enabled == 0) return;
+
+        $aps_batch = get_option('dp-jml-post');
+        $aps_random = get_option('dp-ack-post');
+    
+        // set up the basic post query
+        $args = array(
+            'numberposts' => $aps_batch
+        );
+    
+        $args['post_status'] = "draft";
+        $args['order'] = "ASC";
+		
+		if ($aps_random == 1) $args['orderby'] = "rand";
+        $results = get_posts($args);
+    
+        if (!empty($results)) {
+            // cycle through results and update
+            foreach ($results as $thepost) {
+                $update = array();
+                $update['ID'] = $thepost->ID;
+                $update['post_status'] = 'publish';
+                $thetime = date("Y-m-d H:i:s");
+                $update['post_date'] = $thetime;
+                wp_update_post($update);
+            }
+        }
+        else {
+            update_option('dp-scheduler-status', 0);
+        }
 	}
 
 	/**

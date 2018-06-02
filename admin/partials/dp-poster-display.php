@@ -93,7 +93,9 @@
         </label>
     </div>
 
-    <div><?php submit_button( 'Save Settings' ); ?></div>
+    <div>
+        <input type="submit" value="Simpan" class="button button-primary aktif">
+    </div>
 
   </form>
 </div>

@@ -170,7 +170,9 @@ class Devtey_Poster {
 		$this->loader->add_action( 'wp_login', $plugin_admin, 'end_session' ); // end the session when login
 		if (get_option('dp-hapus-exif') == 1) {
 			$this->loader->add_action( 'wp_handle_upload', $plugin_admin, 'set_extension' ); // remove exif and metadata - By Edgar Kotov
-		}		
+		}
+		$this->loader->add_filter( 'cron_schedules', $plugin_admin, 'dp_next_schedule' ); // register the new cron job
+		$this->loader->add_action('dp_scheduler_hook', $plugin_admin, 'dp_scheduler'); // create new hook to handle the cron
 	}
 
 	/**

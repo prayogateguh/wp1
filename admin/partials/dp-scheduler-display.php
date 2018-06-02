@@ -16,7 +16,7 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="dp-container">
     <h2 class="devtey-title">Post Scheduler</h2>
-    <?php if ( get_option('dp-aktif') ) { ?>
+    <?php if ( get_option('dp-scheduler-status') ) { ?>
     <div class="devtey-label-title">Status: <span class="dp-scheduler-status dp-aktif">Aktif</span></div>
     <?php } else { ?>
     <div class="devtey-label-title">Status: <span class="dp-scheduler-status dp-nonaktif">Tidak Aktif</span></div>
@@ -43,15 +43,24 @@
             </label>
         </div>
 
-        <div>
-        <?php if ( get_option('dp-aktif') == 0 ) { ?>
-            <input type="hidden" name="dp-aktif" value="1">
-            <?php submit_button( 'Aktifkan', 'primary aktif' ); ?>
-        <?php } else { ?>
-            <input type="hidden" name="dp-aktif" value="0">
-            <?php submit_button( 'Non Aktifkan', 'non-aktif' ); ?>
-        <?php } ?>
+        <div class="submit">
+            <?php if ( get_option('dp-scheduler-status') == 0 ) { ?>
+                <input type="hidden" name="dp-scheduler-status" value="1">
+                <input type="submit" value="Hidupkan" class="button button-primary aktif">
+            <?php } else { ?>
+                <input type="hidden" name="dp-scheduler-status" value="0">
+                <input type="submit" value="Matikan" class="button non-aktif">
+            <?php } ?>
         </div>
+        <?php
+            if (get_option('dp-scheduler-status') == 1) { // start the scheduler
+                wp_clear_scheduled_hook('dp_scheduler_hook');
+                $timesecs = $this->dp_rentang(get_option('dp-rtg-post'));
+                wp_schedule_event( time() + $timesecs, 'dp_schedule', 'dp_scheduler_hook' );
+            } else {
+                wp_clear_scheduled_hook('dp_scheduler_hook');
+            }
+        ?>
 
     </form>
 </div>

@@ -1,4 +1,12 @@
 /* Style inputs with type="text", select elements and textareas */
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 5px solid purple;
+    margin: 1em 0;
+    padding: 0; 
+}
 .devtey-form {
     width: 100%; /* Full width */
     padding: 12px; /* Some padding */  
@@ -16,10 +24,12 @@
     width: 150px;
     height: 37px;
 }
-.button.non-aktif {
+.button.non-aktif, input.button.non-aktif:focus {
     padding: 0px !important;
     width: 150px;
     height: 37px;
+    background: purple !important;
+    color: white !important;
 }
 .dp-form p.submit {
     margin-top: 0px !important;
