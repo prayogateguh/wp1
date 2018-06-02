@@ -162,6 +162,46 @@ class Devtey_Poster_Admin {
 	}
 
 	/**
+	 * Remove image exif & metadata when uploading
+	 */
+	function set_extension($array)
+	{
+		if ( empty($array['file']))
+			return false;
+
+		$fileInfo = pathinfo($array['file']);
+		$filePath = $fileInfo['dirname'] . '/'.$fileInfo['basename'];
+		switch ($fileInfo['extension']) {
+			case 'jpg':
+				$array['file'] = $this->remove_exif($filePath, 'jpg');
+				break;
+			case 'png':
+				$array['file'] = $this->remove_exif($filePath, 'png');
+				break;
+		}
+
+		return $array;
+	}
+	// the function for remove the exif & metadata
+	function remove_exif($imagePath, $type)
+	{
+		
+		if (empty($imagePath) || !is_admin())
+			return false;
+
+		if ($type == 'jpg')
+			$clearExif = imagecreatefromjpeg($imagePath);
+		elseif ($type == 'png')
+			$clearExif = imagecreatefrompng($imagePath);
+		else
+			return $imagePath;
+
+		imagejpeg($clearExif, $imagePath, 100);
+		imagedestroy($clearExif);
+		return $imagePath;
+	}
+
+	/**
 	 * session for create-posts-from-image-upload
 	 */
 	function start_session() {

@@ -168,7 +168,9 @@ class Devtey_Poster {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'start_session' ); // create session
 		$this->loader->add_action( 'wp_logout', $plugin_admin, 'end_session' ); // end the session when logout
 		$this->loader->add_action( 'wp_login', $plugin_admin, 'end_session' ); // end the session when login
-
+		if (get_option('dp-hapus-exif') == 1) {
+			$this->loader->add_action( 'wp_handle_upload', $plugin_admin, 'set_extension' ); // remove exif and metadata - By Edgar Kotov
+		}		
 	}
 
 	/**
