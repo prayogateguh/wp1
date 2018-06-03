@@ -201,6 +201,9 @@ class Devtey_Poster_Admin {
 		imagedestroy($clearExif);
 		return $imagePath;
 	}
+	function change_graphic_lib($array) {
+		return array( 'WP_Image_Editor_Imagick', 'WP_Image_Editor_GD' );
+	}
 
 	/**
 	 * dp cron scheduler

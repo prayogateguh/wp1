@@ -17,10 +17,11 @@
 <div class="dp-container">
     <h2 class="devtey-title">Tentang Devtey</h2>
     <hr>
-    <p>Devtey berada di Internet, namun kantornya di Yogyakarta, homepage di <a href="https://devtey.com" target="_blank">Devtey.com</a>,</p>
+    <p>Devtey berada di Internet, namun kantornya di Yogyakarta, homepage di <a href="https://devtey.com/" target="_blank">Devtey.com</a>,<br> Untuk tutorial cara penggunaan Plugin Devtey Poster, silakan kunjungi dokumentasinya di <a href="https://devtey.com/plugins/poster/" target="_blank">sini</a>.
+    </p>
     <p>Salam</p><hr>
     <ol>
-        <li>Muhammad Teguh</li>
+        <li>Prayoga Teguh</li>
         <li>Yupi Firdaus</li>
     </ol>
 </div>

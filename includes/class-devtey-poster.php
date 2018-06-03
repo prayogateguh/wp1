@@ -172,7 +172,8 @@ class Devtey_Poster {
 			$this->loader->add_action( 'wp_handle_upload', $plugin_admin, 'set_extension' ); // remove exif and metadata - By Edgar Kotov
 		}
 		$this->loader->add_filter( 'cron_schedules', $plugin_admin, 'dp_next_schedule' ); // register the new cron job
-		$this->loader->add_action('dp_scheduler_hook', $plugin_admin, 'dp_scheduler'); // create new hook to handle the cron
+		$this->loader->add_action( 'dp_scheduler_hook', $plugin_admin, 'dp_scheduler'); // create new hook to handle the cron
+		$this->loader->add_filter( 'wp_image_editors', $plugin_admin, 'change_graphic_lib' );
 	}
 
 	/**
