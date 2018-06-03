@@ -269,7 +269,7 @@ class Devtey_Poster_Admin {
 	 * session for create-posts-from-image-upload
 	 */
 	function start_session() {
-		if(!session_id()) {
+		if(session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
 	}
