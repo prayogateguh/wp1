@@ -99,6 +99,7 @@ class Devtey_Poster_Admin {
 		register_setting( 'dp-poster-settings', 'dp-hapus-exif' );
 		register_setting( 'dp-poster-settings', 'dp-cap-judul' );
 		register_setting( 'dp-poster-settings', 'dp-auto-desc' );
+		register_setting( 'dp-poster-settings', 'dp-desc-text' );
 	}
 	public function dp_scheduler_settings() {
 		// post scheduler options
@@ -196,7 +197,7 @@ class Devtey_Poster_Admin {
 		else
 			return $imagePath;
 
-		imagejpeg($clearExif, $imagePath, 100);
+		imagejpeg($clearExif, $imagePath, 80);
 		imagedestroy($clearExif);
 		return $imagePath;
 	}

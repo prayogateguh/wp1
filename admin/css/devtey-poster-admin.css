@@ -7,6 +7,18 @@ hr {
     margin: 1em 0;
     padding: 0; 
 }
+textarea
+{
+  width:100%;
+}
+#desc-text
+{
+  margin:5px 0;
+  padding:3px;
+}
+span.desc-tag {
+    font-weight: normal;
+}
 .devtey-form {
     width: 100%; /* Full width */
     padding: 12px; /* Some padding */  

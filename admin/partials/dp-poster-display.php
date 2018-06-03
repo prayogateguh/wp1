@@ -84,13 +84,53 @@
 
     <div class="devtey-toggle">
         <label class="switch">
-            <input type="checkbox" name="dp-auto-desc" value="1" <?php checked( get_option('dp-auto-desc') ); ?>>
+            <input id="dp-toggle-desc" type="checkbox" name="dp-auto-desc" onclick="show_desc()" value="1" <?php checked( get_option('dp-auto-desc') ); ?>>
             <span class="slider"></span>
         </label>
         <label class="desc">
             <span class="title devtey-label-title">Auto Deskripsi</span>
             <span class="desc">(Membuat deskripsi otomatis untuk posting, diambil dari tags.)</span>
         </label>
+        <div id="desc-text" <?php if (get_option('dp-auto-desc') != 1) { ?>style="display:none;"<?php } ?>>
+            <?php
+                if (isset($_POST['dp-desc-text'])) {
+                    update_option('dp-desc-text', stripslashes(wp_filter_post_kses(addslashes($_POST['dp-desc-text']))));
+                }
+            ?>
+            <textarea id="dp-desc-text" name="dp-desc-text" cols="30" rows="10" ><?php echo esc_attr( get_option('dp-desc-text') ); ?></textarea>
+            <input id="show-info" type="checkbox" onclick="show_desc()" value="info">Show Info
+            <div id="desc-info" style="display:none;"><h4>Pilihan tag template: 
+                <span class="desc-tag">
+                    {{post_author}}, {{post_title}}, {{post_date}}, {{post_cats}}, {{post_tags}}, 
+                    {{attch_img_name}}, {{attch_img_page}}, {{attch_img_loc}}, {{attch_img_res}}, {{attch_img_size}}
+                </span>
+                </h4>
+                <p style="font-style: italic;color: #666;">Silakan request jika membutuhkan tag yang lain.</p>
+            </div>
+            
+        </div>
+        <script>
+            function show_desc() {
+                // Get the checkbox
+                var checkBox = document.getElementById("dp-toggle-desc");
+                var show_info = document.getElementById("show-info");
+                // Get the output text
+                var text = document.getElementById("desc-text");
+                var info_box = document.getElementById("desc-info");
+
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked) {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+
+                // info_box.style.display = "none";
+                if (show_info.click) {
+                    info_box.style.display = (info_box.dataset.toggled ^= 1) ? "block" : "none";
+                }
+            }
+        </script>
     </div>
 
     <div>
@@ -99,7 +139,11 @@
 
   </form>
 </div>
-
+<?php
+if ( isset( $_POST['dp-desc-text'])) {
+    echo $_POST['dp-desc-text'];
+}
+?>
 <?php
 session_unset(); // unset all session
 if (!current_user_can('upload_files'))

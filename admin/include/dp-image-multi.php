@@ -73,13 +73,24 @@ wp_update_post( array(
     'post_name' => $attach_ID .'-'. $_post_name
 ) );
 // update post
-//echo do_shortcode("[name_of_shortcode post_id={$_SESSION['post_id']}]");
+$post_data = get_post($_SESSION['post_id']);
+$attch_data = get_post($_SESSION['attch_id']);
 $_gallery = do_shortcode("[dpgallery id={$_SESSION['post_id']}]");
-$_kontent = '<a href="%s" rel="attachment wp-att-%s"><img class="alignnone size-full wp-image-%s" src="%s" alt="" /></a><br/>%s';
-$_kontent = sprintf($_kontent, get_attachment_link(($_SESSION['attch_id'])), $_SESSION['attch_id'], $_SESSION['attch_id'], $_SESSION['attch_loc'], $_gallery);
-wp_update_post( array(
-    'ID' => $_SESSION['post_id'],
-    'post_content' => $_kontent
-) );
+if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
+    include_once 'dp-deskripsi.php';
+    $_kontent = desc_format(get_option('dp-desc-text'), $post_data, $attch_data, $_gallery);
+
+    wp_update_post( array(
+        'ID' => $_SESSION['post_id'],
+        'post_content' => $_kontent
+    ) );
+} else {
+    $_kontent = "<a href=\"{$attch_data->post_name}\"><img src=\"{$attch_data->guid}\" alt=\"{$attch_data->post_title}\"></a>{$_gallery}";
+
+    wp_update_post( array(
+        'ID' => $_SESSION['post_id'],
+        'post_content' => $_kontent
+    ) );
+}
 
 return $attach_ID;
