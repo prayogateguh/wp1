@@ -75,17 +75,16 @@ wp_update_post( array(
 // update post
 $post_data = get_post($_SESSION['post_id']);
 $attch_data = get_post($_SESSION['attch_id']);
-$_gallery = do_shortcode("[dpgallery id={$_SESSION['post_id']}]");
 if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
     include_once 'dp-deskripsi.php';
-    $_kontent = desc_format(get_option('dp-desc-text'), $post_data, $attch_data, $_gallery);
+    $_kontent = desc_format(get_option('dp-desc-text'), $post_data, $attch_data);
 
     wp_update_post( array(
         'ID' => $_SESSION['post_id'],
         'post_content' => $_kontent
     ) );
 } else {
-    $_kontent = "<a href=\"{$attch_data->post_name}\"><img src=\"{$attch_data->guid}\" alt=\"{$attch_data->post_title}\"></a>{$_gallery}";
+    $_kontent = "<a href=\"{$attch_data->post_name}\"><img src=\"{$attch_data->guid}\" alt=\"{$attch_data->post_title}\"></a>";
 
     wp_update_post( array(
         'ID' => $_SESSION['post_id'],

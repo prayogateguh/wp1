@@ -102,7 +102,7 @@
             <div id="desc-info" style="display:none;"><h4>Pilihan tag template: 
                 <span class="desc-tag">
                     {{post_author}}, {{post_title}}, {{post_date}}, {{post_cats}}, {{post_tags}}, 
-                    {{attch_img_name}}, {{attch_img_page}}, {{attch_img_loc}}, {{attch_img_res}}, {{attch_img_size}}
+                    {{attch_img_name}}, {{attch_img_page}}, {{attch_img_loc}}, {{attch_img_res}}, {{attch_img_size}}, {{all_attch_img}}
                 </span>
                 </h4>
                 <p style="font-style: italic;color: #666;">Silakan request jika membutuhkan tag yang lain.</p>

@@ -128,8 +128,17 @@ class Devtey_Poster_Public {
 			return "";
 		}
 
-		$_attch_id = implode(',', $_attch_id);
-		return "[gallery columns=\"4\" ids=\"{$_attch_id}\"]";
+		$dom = '';
+		foreach ($_attch_id as $_aid) {
+			$attc = get_post($_aid);
+			$dom .= "<a href='{$attc->post_name}/'><img class='dp-attch-item' id='dp-attch-item-{$attc->ID}' src='{$attc->guid}' alt='{$attc->post_title}'></a>";
+		}
+		$dom = "<div class='dp-gallery'>{$dom}</div>";
+		$output = $dom;
+		
+		return $output;
+		//$_attch_id = implode(',', $_attch_id);
+		//return "[gallery columns=\"4\" ids=\"{$_attch_id}\"]";
 	}
 
 }

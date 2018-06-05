@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_PARSE);
-function desc_format($content, $post, $attch, $gallery) {
+function desc_format($content, $post, $attch) {
     // var_dump($attch);
     preg_match_all('/({{.*?}})/', $content, $matches);
 
@@ -24,11 +24,11 @@ function desc_format($content, $post, $attch, $gallery) {
     $_post_cats = "<a href=\"{$category_link}\" title=\"{$cat_name}\">{$cat_name}</a>";
     $_post_tags = $_tags;
     $_post_attch_name = $attch->post_title;
-    //$_post_attch_page = get_attachment_link($attch->ID);
     $_post_attch_page = $attch->post_name;
     $_post_attch_url = $attch->guid;
     $_post_attch_res = "{$attch_img[0]}x{$attch_img[1]}";
     $_post_attch_size = size_format(filesize( get_attached_file( $attch->ID ) ));
+    $_post_all_attch = do_shortcode("[dpgallery id={$post->ID}]");
 
     $search = array(
         '{{post_author}}',
@@ -41,6 +41,7 @@ function desc_format($content, $post, $attch, $gallery) {
         '{{attch_img_loc}}',
         '{{attch_img_res}}',
         '{{attch_img_size}}',
+        '{{all_attch_img}}',
     );
     $replace = array(
         ucwords($_author),
@@ -52,7 +53,8 @@ function desc_format($content, $post, $attch, $gallery) {
         $_post_attch_page,
         $_post_attch_url,
         $_post_attch_res,
-        $_post_attch_size
+        $_post_attch_size,
+        $_post_all_attch
     );
     $deskripsi = str_replace($search, $replace, $content);
     return "$deskripsi {$gallery}";
