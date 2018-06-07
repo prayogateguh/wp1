@@ -84,16 +84,6 @@ if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
         'post_content' => $_kontent
     ) );
 
-    if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi pada attachment diaktifkan
-        wp_update_post( array(
-            'ID' => $attach_ID,
-            'post_parent' => $_SESSION['post_id'],
-            'post_title' => ucwords($_file_name),
-            'post_name' => $attach_ID .'-'. $_post_name,
-            'post_content' => $_kontent
-        ) );
-    }
-
 } else {
     $_kontent = "<a href=\"{$attch_data->post_name}\"><img src=\"{$attch_data->guid}\" alt=\"{$attch_data->post_title}\"></a>";
 

@@ -92,14 +92,6 @@
             <span class="desc">(Membuat deskripsi otomatis untuk posting)</span>
         </label>
         <div id="desc-text" <?php if (get_option('dp-auto-desc') != 1) { ?>style="display:none;"<?php } ?>>
-            <label class="switch">
-                <input id="dp-toggle-desc-attch" type="checkbox" name="dp-auto-desc-attch" value="1" <?php checked( get_option('dp-auto-desc-attch') ); ?>>
-                <span class="slider round"></span>
-            </label>
-            <label class="desc-attch">
-                <span class="title devtey-label-title">Auto Deskripsi Untuk Attachment?</span>
-                <span class="desc">(Membuat deskripsi otomatis untuk halaman attachment gambar.)</span>
-            </label><br/><br/>
             <?php
                 if (isset($_POST['dp-desc-text'])) {
                     update_option('dp-desc-text', stripslashes(wp_filter_post_kses(addslashes($_POST['dp-desc-text']))));
