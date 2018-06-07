@@ -50,12 +50,6 @@ $_SESSION['post_id'] = $post_id;
 $_post_ = str_replace("_"," ", $attachment->post_title);
 $_file_name = @end((explode('-', $_post_, 3)));
 $_post_name = $attach_ID .'-'. str_replace("_","-", $attachment->post_title);
-wp_update_post( array(
-    'ID' => $attach_ID,
-    'post_parent' => $post_id,
-    'post_title' => ucwords($_file_name),
-    'post_name' => $_post_name
-) );
 // update post
 $post_data = get_post($_SESSION['post_id']);
 $attch_data = get_post($_SESSION['attch_id']);
@@ -67,6 +61,25 @@ if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
         'ID' => $_SESSION['post_id'],
         'post_content' => $_kontent
     ) );
+    
+    if (get_option('dp-auto-desc-attch') == 1) { // jika auto deskripsi pada attachment diaktifkan
+        wp_update_post( array(
+            'ID' => $attach_ID,
+            'post_parent' => $post_id,
+            'post_title' => ucwords($_file_name),
+            'post_name' => $_post_name,
+            'post_content' => $_kontent
+        ) );
+    } else {
+        wp_update_post( array(
+            'ID' => $attach_ID,
+            'post_parent' => $post_id,
+            'post_title' => ucwords($_file_name),
+            'post_name' => $_post_name,
+        ) );
+    }
+
+    
 } else {
     $_kontent = "<a href=\"$attch_data->post_name\"><img src=\"$attch_data->guid\" alt=\"$attch_data->post_title\"></a>";
 
