@@ -1,4 +1,9 @@
 <?php
+$referr = $_SERVER['HTTP_REFERER'];
+$url = admin_url("admin.php?page=dp-post-creator");
+if ($referr != $url) { // hanya jalankan post creator jika diakses dari halaman plugin
+    return;
+}
 
 require_once('dp-functions.php');
 
