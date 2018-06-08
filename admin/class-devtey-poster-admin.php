@@ -167,6 +167,12 @@ class Devtey_Poster_Admin {
 	 */
 	function set_extension($array)
 	{
+		$referr = $_SERVER['HTTP_REFERER'];
+		$url = admin_url("admin.php?page=dp-post-creator");
+		if ($referr != $url) { // hanya jalankan post creator jika diakses dari halaman plugin
+			return $array;
+		}
+
 		if ( empty($array['file']))
 			return false;
 
@@ -186,7 +192,6 @@ class Devtey_Poster_Admin {
 	// the function for remove the exif & metadata
 	function remove_exif($imagePath, $type)
 	{
-		
 		if (empty($imagePath) || !is_admin())
 			return false;
 
