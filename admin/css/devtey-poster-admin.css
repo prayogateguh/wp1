@@ -1,5 +1,5 @@
 /* Style inputs with type="text", select elements and textareas */
-hr {
+.dp-container hr {
     display: block;
     height: 1px;
     border: 0;
