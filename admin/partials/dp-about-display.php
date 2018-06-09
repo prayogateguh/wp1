@@ -19,6 +19,10 @@
     <hr>
     <p>Devtey berada di Internet, namun kantornya di Yogyakarta, homepage di <a href="https://devtey.com/" target="_blank">Devtey.com</a>,<br> Untuk tutorial cara penggunaan Plugin Devtey Poster, silakan kunjungi dokumentasinya di <a href="https://devtey.com/plugins/poster/" target="_blank">sini</a>.
     </p>
+    <p>
+        Jika ada error pada saat Hapus Exif, silakan klik di <a href="<?php echo plugin_dir_url( __FILE__ ) . '../include/info.php'; ?>" target="_blank">sini</a>. Kemudian, CTRL+F (sarch) ketikkan "gd" dan pastikan GD support telah "enabled". Perhatikan gambar di bawah.
+        <img src="<?php echo plugin_dir_url( __FILE__ ) . '../../images/admin/gd.PNG'; ?>"> 
+    </p>
     <p>Salam</p><hr>
     <ol>
         <li>Prayoga Teguh</li>
