@@ -28,13 +28,13 @@
         <input name="dp_key" type="text" id="dp_key" placeholder="XXXX-XXXX-XXXX" class="devtey-form" value="<?php echo esc_attr( get_option('dp_key') ); ?>">
         <div>
         <?php
-            if (get_option('dp_poster') == 1) { ?>
-            <input type="submit" name="dp_off" value="Matikan" class="button non-aktif" />
-            <?php } else { ?>
+            if (get_option('dp_poster') != 1) { ?>
             <input type="submit" name="dp_on" value="Hidupkan" class="button button-primary aktif" />
             <?php } ?>
-        
         </div>
+        <?php if (get_option('dp_poster') == 2) { ?>
+            <small>Aktivasi error, silakan cek lisensi Anda.</small>
+        <?php } ?>
     </form>
     
     

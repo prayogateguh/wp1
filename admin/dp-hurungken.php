@@ -1,6 +1,6 @@
 <?php
 if (isset($_REQUEST['dp_on'])) {
-    $license_key = $_REQUEST['dp_key'];
+    $license_key = trim($_REQUEST['dp_key']);
 
     // API query parameters
     $api_params = array(
@@ -20,13 +20,15 @@ if (isset($_REQUEST['dp_on'])) {
         echo "Unexpected Error! The query returned with an error.";
     }
     
-    // License data.
+
     $license_data = json_decode(wp_remote_retrieve_body($response));
-    //var_dump($license_data);
-    if($license_data->result == get_option('dp_info')){//Success was returned for the license activation
+
+    if($license_data->result == get_option('dp_info')){
         update_option('dp_poster', '1');
         update_option('dp_key', $license_key);
         echo '<meta http-equiv="refresh" content="0">';
+    } else {
+        update_option('dp_poster', '2');
     }
 
 }

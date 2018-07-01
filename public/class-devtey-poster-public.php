@@ -131,9 +131,16 @@ class Devtey_Poster_Public {
 		$dom = '';
 		foreach ($_attch_id as $_aid) {
 			$attc = get_post($_aid);
-			$dom .= "<a class='dp-item' href='{$attc->post_name}/'><img class='dp-item-img' id='dp-attch-item-{$attc->ID}' src='{$attc->guid}' alt='{$attc->post_title}'></a>";
+			$dom .= "<a class='dp-item' href='{$attc->post_name}/'><img class='mySlides' id='dp-attch-item-{$attc->ID}' src='{$attc->guid}' alt='{$attc->post_title}' style='width:100%;opacity:0.7;'></a>";
 		}
-		$dom = "<div class='dp-gallery'>{$dom}</div>";
+		// $dom = "<div class='dp-gallery'>{$dom}</div>";
+$dom = "
+<div class='w3-content w3-display-container'>
+{$dom}
+<button class='w3-button w3-black w3-display-left' onclick='plusDivs(-1)'>&#10094;</button>
+<button class='w3-button w3-black w3-display-right' onclick='plusDivs(1)'>&#10095;</button>
+</div>
+";
 		$output = $dom;
 		
 		return $output;

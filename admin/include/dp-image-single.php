@@ -1,16 +1,17 @@
 <?php
+// hanya jalankan post creator jika diakses dari halaman plugin
 $referr = $_SERVER['HTTP_REFERER'];
 $url = admin_url("admin.php?page=dp-post-creator");
-if ($referr != $url) { // hanya jalankan post creator jika diakses dari halaman plugin
+if ($referr != $url) {
     return;
 }
 
 require_once('dp-functions.php');
 
 $attachment = get_post( $attach_ID );
-// 1 - kategori
+// kategori
 $kategori = get_option('dp-kategori');
-// 2 - format judul
+// format judul
 $_fmt_title = get_option('dp-post-title');
 $_fmt = array($_fmt_title);
 
@@ -24,21 +25,19 @@ if ($_fmt[0] != '') {
 } else {
     $title = $_file_name;
 }
-// 3 - auto tag
+// auto tag
 if (get_option('dp-auto-tag') == 1) {
     $tags = explode(' ', $_file_name);
 } else {
     $tags = array(0);
 }
-// 4 - hapus exif data from the image
-// 5 - capitalize title
+// capitalize title
 if (get_option('dp-cap-judul') == 1) {
     $title = ucwords($title);
 }
-// 6 - auto descripsi
-// 7 - multiple images into one post
-$_attch_id = strtok($attachment->post_title, '-'); // ambil string sebelum tanda strip (-) pertama
 
+// create post
+$_attch_id = strtok($attachment->post_title, '-'); // ambil string sebelum tanda strip (-) pertama
 $_SESSION['_id'] = $_attch_id;
 $_SESSION['attch_id'] = $attachment->ID;
 $_SESSION['attch_loc'] = $attachment->guid;
@@ -51,7 +50,12 @@ $my_post_data = array(
 $post_id = wp_insert_post( $my_post_data );
 $_SESSION['post_id'] = $post_id;
 
-// attach media to post
+// set featured
+if (get_option('dp-featured-image') == 1) {
+    set_post_thumbnail( $_SESSION['post_id'], $_SESSION['attch_id'] );
+}
+
+// attach wallpaper to the post
 $_post_ = str_replace("_"," ", $attachment->post_title);
 $_file_name = @end((explode('-', $_post_, 3)));
 $_post_name = $attach_ID .'-'. str_replace("_","-", $attachment->post_title);
@@ -61,7 +65,8 @@ wp_update_post( array(
     'post_title' => ucwords($_file_name),
     'post_name' => $_post_name,
 ) );
-// update post
+
+// update post dengan auto deskripsi / tidak
 $post_data = get_post($_SESSION['post_id']);
 $attch_data = get_post($_SESSION['attch_id']);
 if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
@@ -73,7 +78,7 @@ if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
         'post_content' => $_kontent
     ) );    
 } else {
-    $_kontent = "<a href=\"$attch_data->post_name\"><img src=\"$attch_data->guid\" alt=\"$attch_data->post_title\"></a>";
+    $_kontent = "";
 
     wp_update_post( array(
         'ID' => $_SESSION['post_id'],

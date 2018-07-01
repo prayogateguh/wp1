@@ -28,7 +28,8 @@ function desc_format($content, $post, $attch) {
     $_post_attch_url = $attch->guid;
     $_post_attch_res = "{$attch_img[0]}x{$attch_img[1]}";
     $_post_attch_size = size_format(filesize( get_attached_file( $attch->ID ) ));
-    $_post_all_attch = do_shortcode("[dpgallery id={$post->ID}]");
+    $_single_wallpaper = "<img src='{$_post_attch_url}' alt='{$_post_title}' />";
+    $_multi_wallpaper = do_shortcode("[dpgallery id={$post->ID}]");
 
     $search = array(
         '{{post_author}}',
@@ -41,7 +42,8 @@ function desc_format($content, $post, $attch) {
         '{{attch_img_loc}}',
         '{{attch_img_res}}',
         '{{attch_img_size}}',
-        '{{all_attch_img}}',
+        '{{single_wallpaper}}',
+        '{{multi_wallpaper}}',
     );
     $replace = array(
         ucwords($_author),
@@ -54,7 +56,8 @@ function desc_format($content, $post, $attch) {
         $_post_attch_url,
         $_post_attch_res,
         $_post_attch_size,
-        $_post_all_attch
+        $_single_wallpaper,
+        $_multi_wallpaper
     );
     $deskripsi = str_replace($search, $replace, $content);
     return "$deskripsi {$gallery}";

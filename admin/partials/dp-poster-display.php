@@ -84,6 +84,17 @@
 
     <div class="devtey-toggle">
         <label class="switch">
+            <input type="checkbox" name="dp-featured-image" value="1" <?php checked( get_option('dp-featured-image') ); ?>>
+            <span class="slider"></span>
+        </label>
+        <label class="desc">
+            <span class="title devtey-label-title">Set Featured Image</span>
+            <span class="desc">(Jika diaktifkan akan menyetting wallpaper menjadi featured image pada post.)</span>
+        </label>
+    </div>
+
+    <div class="devtey-toggle">
+        <label class="switch">
             <input id="dp-toggle-desc" type="checkbox" name="dp-auto-desc" onclick="show_desc()" value="1" <?php checked( get_option('dp-auto-desc') ); ?>>
             <span class="slider"></span>
         </label>
@@ -103,7 +114,7 @@
                 <h4>Pilihan tag template: 
                 <span class="desc-tag">
                     {{post_author}}, {{post_title}}, {{post_date}}, {{post_cats}}, {{post_tags}}, 
-                    {{attch_img_name}}, {{attch_img_page}}, {{attch_img_loc}}, {{attch_img_res}}, {{attch_img_size}}, {{all_attch_img}}
+                    {{attch_img_name}}, {{attch_img_page}}, {{attch_img_loc}}, {{attch_img_res}}, {{attch_img_size}}, {{single_wallpaper}}, {{multi_wallpaper}}
                 </span>
                 </h4>
                 <p style="font-style: italic;color: #666;">Silakan request jika membutuhkan tag yang lain.</p>

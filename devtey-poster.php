@@ -36,8 +36,8 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'PLUGIN_NAME_VERSION', '1.0.0' );
-define( 'DP_SK', '5b0a0e8a3e1900.89385121' );
-define( 'DP_SU', 'https://teguh.me' );
+define( 'DP_SK', '5b35daba863653.21864685' );
+define( 'DP_SU', 'https://devtey.com' );
 define( 'DP_IR', 'Devtey Poster' );
 
 /**

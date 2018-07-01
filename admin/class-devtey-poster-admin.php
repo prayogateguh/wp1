@@ -98,6 +98,7 @@ class Devtey_Poster_Admin {
 		register_setting( 'dp-poster-settings', 'dp-auto-tag' );
 		register_setting( 'dp-poster-settings', 'dp-hapus-exif' );
 		register_setting( 'dp-poster-settings', 'dp-cap-judul' );
+		register_setting( 'dp-poster-settings', 'dp-featured-image' );
 		register_setting( 'dp-poster-settings', 'dp-auto-desc' );
 		register_setting( 'dp-poster-settings', 'dp-desc-text' );
 	}
