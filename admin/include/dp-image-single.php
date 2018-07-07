@@ -1,8 +1,14 @@
 <?php
 // hanya jalankan post creator jika diakses dari halaman plugin
 $referr = $_SERVER['HTTP_REFERER'];
-$url = admin_url("admin.php?page=dp-post-creator");
-if ($referr != $url) {
+$devtey = admin_url("admin.php?page=dp-post-creator");
+if (get_option('dp-add-server') == 1) {
+    $add_server = admin_url("upload.php?page=add-from-server");
+} else {
+    $add_server = "";
+}
+
+if ($referr != $devtey and $referr != $add_server) {
     return;
 }
 

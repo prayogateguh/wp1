@@ -37,6 +37,7 @@ class Devtey_Poster_Deactivator {
 		dposter('dp-hapus-exif');
 		dposter('dp-cap-judul');
 		dposter('dp-featured-image');
+		dposter('dp-add-server');
 		dposter('dp-auto-desc');
 		dposter('dp-desc-text');
 		dposter('dp-scheduler-status');

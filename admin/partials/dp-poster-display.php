@@ -95,6 +95,17 @@
 
     <div class="devtey-toggle">
         <label class="switch">
+            <input type="checkbox" name="dp-add-server" value="1" <?php checked( get_option('dp-add-server') ); ?>>
+            <span class="slider"></span>
+        </label>
+        <label class="desc">
+            <span class="title devtey-label-title">Add From Server</span>
+            <span class="desc">(Punya gambar di server? Silakan aktifkan fitur ini dan gunakan Plugin tambahan: <strong>Add From Server</strong>.)</span>
+        </label>
+    </div>
+
+    <div class="devtey-toggle">
+        <label class="switch">
             <input id="dp-toggle-desc" type="checkbox" name="dp-auto-desc" onclick="show_desc()" value="1" <?php checked( get_option('dp-auto-desc') ); ?>>
             <span class="slider"></span>
         </label>

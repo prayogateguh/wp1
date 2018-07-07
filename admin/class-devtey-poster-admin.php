@@ -99,6 +99,7 @@ class Devtey_Poster_Admin {
 		register_setting( 'dp-poster-settings', 'dp-hapus-exif' );
 		register_setting( 'dp-poster-settings', 'dp-cap-judul' );
 		register_setting( 'dp-poster-settings', 'dp-featured-image' );
+		register_setting( 'dp-poster-settings', 'dp-add-server' );
 		register_setting( 'dp-poster-settings', 'dp-auto-desc' );
 		register_setting( 'dp-poster-settings', 'dp-desc-text' );
 	}
@@ -161,6 +162,10 @@ class Devtey_Poster_Admin {
 		} else {
 			include_once 'include/dp-image-single.php';
 		}
+	}
+
+	function server_creator( $attach_ID ) {
+		include 'include/dp-image-single.php';
 	}
 
 	/**
