@@ -140,6 +140,17 @@ class Devtey_Poster_Admin {
 	}
 
 	/**
+	 * Register the layout for the Devtey Wallpaper Downloader
+	 * 
+	 * @since	1.0.0
+	 */
+	
+	public function dp_wallpaper_downloader() {
+		include_once 'partials/dp-wallpaper-downloader-display.php';
+		include 'include/dp-wallpaper-downloader.php';
+	}
+
+	/**
 	 * Display callback for the submenu page.
 	 */
 	function dp_post_scheduler() { 
@@ -165,7 +176,7 @@ class Devtey_Poster_Admin {
 	}
 
 	function server_creator( $attach_ID ) {
-		include 'include/dp-image-single.php';
+		include 'include/dp-image-server.php';
 	}
 
 	/**
@@ -176,7 +187,7 @@ class Devtey_Poster_Admin {
 		$referr = $_SERVER['HTTP_REFERER'];
 		$devtey = admin_url("admin.php?page=dp-post-creator");
 		if (get_option('dp-add-server') == 1) {
-			$add_server = admin_url("upload.php?page=add-from-server");
+			$add_server = admin_url("admin.php?page=mediafromftp-search-register");
 		} else {
 			$add_server = "";
 		}
@@ -296,6 +307,7 @@ class Devtey_Poster_Admin {
 	public function display_poster_page() {
 		add_submenu_page('devtey-poster', 'Active', 'Active', 'manage_options', 'devtey-poster' );
 		add_submenu_page('devtey-poster', 'Post Creator', 'Post Creator', 'manage_options', 'dp-post-creator', array($this, 'dp_post_creator') );
+		add_submenu_page('devtey-poster', 'Wallpaper Downloader', 'Wallpaper Downloader', 'manage_options', 'dp-wallpaper-downloader', array($this, 'dp_wallpaper_downloader') );		
 		add_submenu_page('devtey-poster', 'Post Scheduler', 'Post Scheduler', 'manage_options', 'dp-post-scheduler', array($this, 'dp_post_scheduler') );
 		add_submenu_page('devtey-poster', 'About', 'About', 'manage_options', 'dp-about', array($this, 'dp_about') );
 	}

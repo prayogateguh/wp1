@@ -1,12 +1,9 @@
 <?php
 // hanya jalankan post creator jika diakses dari halaman plugin
 $referr = $_SERVER['HTTP_REFERER'];
-$sekarang = admin_url("admin.php?page=dp-post-creator");
+$sekarang = admin_url("admin.php?page=mediafromftp-search-register");
 
-if ($referr != $sekarang) {
-    return;
-}
-
+if ($referr === $sekarang) {
 require_once('dp-functions.php');
 
 $attachment = get_post( $attach_ID );
@@ -88,3 +85,6 @@ if (get_option('dp-auto-desc') == 1) { // jika auto deskripsi diaktifkan
 }
 
 return $attach_ID;
+} else {
+    return;
+}
