@@ -15,7 +15,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="dp-container">
-    <h2 class="devtey-title">Wallpaper Downloader</h2>
+    <h2 class="devtey-title">Wallpaper Grabber</h2>
     <?php if (get_option('dp-download-status') == 1) { ?>
     <div class="devtey-label-title">Download status: <span class="dp-scheduler-status dp-aktif" style="padding:2px;">on</span></div>
     <?php } else { ?>
@@ -28,7 +28,7 @@
         <textarea name="dp-keywords" id="dp-keywords" placeholder="Masukkan keywords perbaris" class="devtey-form" rows="4" cols="50"><?php echo esc_attr( $_POST['dp-keywords']); ?></textarea>
         <label for="dp-download-perkeyword" class="devtey-label-title">Limit wallpaper per keyword</label>
         <input name="dp-download-perkeyword" id="dp-download-perkeyword" placeholder="Masukkan berapa jumlah wallpaper yang ingin didownload per-keywordnya." class="devtey-form" value="<?php echo esc_attr( $_POST['dp-download-perkeyword']); ?>" />
-        <p>Wallpaper akan tersimpan di <span style="font-weight: bold;"><?php echo wp_upload_dir()['basedir']; ?></span></p>
+        <p>Wallpaper akan tersimpan di <span style="font-weight: bold;"><?php echo wp_upload_dir()['basedir']; ?>/DDMMYY/</span>. Proses download akan selesai ketika <strong><em>Download status</em></strong> menjadi <span class="dp-scheduler-status dp-nonaktif" style="padding:2px;">off</span>.</p>
         <div class="submit">
             <input name="dp-downloader-status" type="submit" value="Download" class="button button-primary aktif">
         </div>

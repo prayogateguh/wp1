@@ -381,9 +381,9 @@ class Devtey_Poster_Admin {
 	}
 
 	public function display_poster_page() {
-		add_submenu_page('devtey-poster', 'Active', 'Active', 'manage_options', 'devtey-poster' );
-		add_submenu_page('devtey-poster', 'Post Creator', 'Post Creator', 'manage_options', 'dp-post-creator', array($this, 'dp_post_creator') );
-		add_submenu_page('devtey-poster', 'Wallpaper Downloader', 'Wallpaper Downloader', 'manage_options', 'dp-wallpaper-downloader', array($this, 'dp_wallpaper_downloader') );		
+		add_submenu_page('devtey-poster', 'Post Setting', 'Post Setting', 'manage_options', 'devtey-poster' );
+		add_submenu_page('devtey-poster', 'Wallpaper Uploader', 'Wallpaper Uploader', 'manage_options', 'dp-post-creator', array($this, 'dp_post_creator') );
+		add_submenu_page('devtey-poster', 'Wallpaper Grabber', 'Wallpaper Grabber', 'manage_options', 'dp-wallpaper-downloader', array($this, 'dp_wallpaper_downloader') );		
 		add_submenu_page('devtey-poster', 'Post Scheduler', 'Post Scheduler', 'manage_options', 'dp-post-scheduler', array($this, 'dp_post_scheduler') );
 		add_submenu_page('devtey-poster', 'About', 'About', 'manage_options', 'dp-about', array($this, 'dp_about') );
 	}
