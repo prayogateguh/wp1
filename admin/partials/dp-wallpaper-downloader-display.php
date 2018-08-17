@@ -16,6 +16,11 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="dp-container">
     <h2 class="devtey-title">Wallpaper Downloader</h2>
+    <?php if (get_option('dp-download-status') == 1) { ?>
+    <div class="devtey-label-title">Download status: <span class="dp-scheduler-status dp-aktif" style="padding:2px;">on</span></div>
+    <?php } else { ?>
+    <div class="devtey-label-title">Download status: <span class="dp-scheduler-status dp-nonaktif" style="padding:2px;">off</span></div>
+    <?php } ?>
     <hr>
 
     <form method="post" class="dp-form">
@@ -27,6 +32,5 @@
         <div class="submit">
             <input name="dp-downloader-status" type="submit" value="Download" class="button button-primary aktif">
         </div>
-
     </form>
 </div>

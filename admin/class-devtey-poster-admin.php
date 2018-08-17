@@ -103,6 +103,12 @@ class Devtey_Poster_Admin {
 		register_setting( 'dp-poster-settings', 'dp-auto-desc' );
 		register_setting( 'dp-poster-settings', 'dp-desc-text' );
 	}
+	public function dp_downloader() {
+		// downloader status variable
+		register_setting( 'dp-download-settings', 'dp-download-status' );
+		register_setting( 'dp-download-settings', 'dp-download-keywords' );
+		register_setting( 'dp-download-settings', 'dp-download-total' );
+	}
 	public function dp_scheduler_settings() {
 		// post scheduler options
 		register_setting( 'dp-scheduler-settings', 'dp-scheduler-status' );
@@ -187,7 +193,7 @@ class Devtey_Poster_Admin {
 		$referr = $_SERVER['HTTP_REFERER'];
 		$devtey = admin_url("admin.php?page=dp-post-creator");
 		if (get_option('dp-add-server') == 1) {
-			$add_server = admin_url("admin.php?page=mediafromftp-search-register");
+			$add_server = admin_url("upload.php?page=add-from-server");
 		} else {
 			$add_server = "";
 		}
@@ -290,6 +296,76 @@ class Devtey_Poster_Admin {
         else {
             update_option('dp-scheduler-status', 0);
         }
+	}
+
+	/**
+	 * Download wallpapers data to wallpapers.txt
+	 */
+	function dp_download_wallpaper() {
+		require 'include/vendor/autoload.php';
+		include_once "include/GoogleImageGrabber.php";
+		$dpKeywords = nl2br(get_option('dp-download-keywords'));
+		$dpKeywords = explode(PHP_EOL, $dpKeywords);
+		$gid = new GoogleImageGrabber();
+
+		// $idx = 1;
+		$uploadDir = wp_upload_dir()['basedir'];
+
+		$myfile = fopen("$uploadDir/wallpapers.txt", "w") or die("Unable to open file!"); // buat file text untuk nampung data wallpaper
+		foreach ($dpKeywords as $keyword) {
+			$images = $gid->grab($keyword);
+
+			//var_dump($images);
+
+			foreach ($images as $image) {
+				// echo "$idx - ";
+				$namafile = $image['title'];
+				$filetype = $image['filetype'];
+				$lokasi = $image['url'];
+				// $idx ++;
+
+				// rename it
+				$namafile = preg_replace("/[^ \w]+/", "", $namafile);
+				$namafile = str_replace(" ", "_", $namafile);
+				$namafile = strtolower($namafile);
+
+				// save the wallpapers data
+				$txt = "$namafile.$filetype>$lokasi\n";
+				fwrite($myfile, $txt);
+			}
+		}
+		fclose($myfile); // tutup file penampung data wallpaper
+
+		if (! wp_next_scheduled ( 'dp_download_schedule' )) { // do the download process using wp cron
+			wp_schedule_single_event( time(), 'dp_download_schedule' );
+		}
+	}
+
+	/**
+	 * Wallpaper Download scheduler - run in the background
+	 */
+	function dp_download_scheduler() {
+		$uploadDir = wp_upload_dir()['basedir'];
+		$fh = fopen("$uploadDir/wallpapers.txt",'r');
+		while ($line = fgets($fh)) {
+			$wallpaperData = explode(">", $line);
+			$lokasi = trim($wallpaperData[1]);
+			$headers = get_headers($lokasi, 1);
+
+			$waktu = date("dmy"); // create folder
+			if (!file_exists("$uploadDir/$waktu/")) {
+				mkdir("$uploadDir/$waktu/", 0777, true);
+			}
+
+			if ($headers[0] == 'HTTP/1.1 200 OK' && $headers["Content-Length"] != "0") { // hanya download gambar yang bagus
+				exec("nohup wget --timeout=30 --tries=1 $lokasi -A.jpg -O $uploadDir/$waktu/$wallpaperData[0]");
+			} else {
+				continue;
+			}
+		}
+		update_option('dp-download-status', '0');
+		echo '<meta http-equiv="refresh" content="0">'; // refresh browser setelah semua download selesai
+		fclose($fh);
 	}
 
 	/**

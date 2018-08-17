@@ -39,7 +39,7 @@ class GoogleImageGrabber
 		$results = [];
 
 		$btsCounter = 1;
-		$bts = $_POST['dp-download-perkeyword'];
+		$bts = get_option('dp-download-total');
 		foreach ($htmldom->find('.rg_di > .rg_meta') as $n => $dataset) {
 
 			$jsondata = $dataset->text;

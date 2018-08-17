@@ -1,7 +1,7 @@
 <?php
 // hanya jalankan post creator jika diakses dari halaman plugin
 $referr = $_SERVER['HTTP_REFERER'];
-$sekarang = admin_url("admin.php?page=mediafromftp-search-register");
+$sekarang = admin_url("upload.php?page=add-from-server");
 
 if ($referr === $sekarang) {
 require_once('dp-functions.php');

@@ -175,9 +175,14 @@ class Devtey_Poster {
 		if (get_option('dp-hapus-exif') == 1) {
 			$this->loader->add_action( 'wp_handle_upload', $plugin_admin, 'set_extension' ); // remove exif and metadata - By Edgar Kotov
 		}
+		$this->loader->add_filter( 'wp_image_editors', $plugin_admin, 'change_graphic_lib' );
+		// the cron jobs
+		// 1. post scheduler
 		$this->loader->add_filter( 'cron_schedules', $plugin_admin, 'dp_next_schedule' ); // register the new cron job
 		$this->loader->add_action( 'dp_scheduler_hook', $plugin_admin, 'dp_scheduler'); // create new hook to handle the cron
-		$this->loader->add_filter( 'wp_image_editors', $plugin_admin, 'change_graphic_lib' );
+		// 2. downloader
+		$this->loader->add_action( 'dp_download_keywords', $plugin_admin, 'dp_download_wallpaper'); // download scheduler
+		$this->loader->add_action( 'dp_download_schedule', $plugin_admin, 'dp_download_scheduler'); // download scheduler
 	}
 
 	/**

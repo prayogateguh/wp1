@@ -49,6 +49,9 @@ class Devtey_Poster_Deactivator {
 		dposter('dp_info');
 		dposter('dp_key');
 		dposter('dp_poster');
+		dposter('dp-download-status');
+		dposter('dp-download-keywords');
+		dposter('dp-download-total');
 	}
 
 }

@@ -17,9 +17,9 @@
 <div class="dp-container">
     <h2 class="devtey-title">Post Scheduler</h2>
     <?php if ( get_option('dp-scheduler-status') ) { ?>
-    <div class="devtey-label-title">Status: <span class="dp-scheduler-status dp-aktif">Aktif</span></div>
+    <div class="devtey-label-title">Scheduler status: <span class="dp-scheduler-status dp-aktif" style="padding:2px;">on</span></div>
     <?php } else { ?>
-    <div class="devtey-label-title">Status: <span class="dp-scheduler-status dp-nonaktif">Tidak Aktif</span></div>
+    <div class="devtey-label-title">Scheduler status: <span class="dp-scheduler-status dp-nonaktif" style="padding:2px;">off</span></div>
     <?php } ?>
     <hr>
 
